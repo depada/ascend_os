@@ -2,7 +2,7 @@
 
 Turn any desired state into tracked execution.
 
-AscendOS is a premium, domain-agnostic execution dashboard for people who want to move from current state to desired state with measurable progress. Sprint 1 establishes the deployable foundation: authentication, MySQL persistence, seeded users, a premium landing page, and a protected dashboard shell.
+AscendOS is a premium, domain-agnostic execution dashboard for people who want to move from current state to desired state with measurable progress. Sprint 1 establishes the deployable foundation: authentication, MySQL persistence, seeded users, a premium landing page, and a protected dashboard shell. Sprint 2 adds the execution-profile onboarding flow.
 
 ## Tech Stack
 
@@ -34,6 +34,15 @@ AscendOS is a premium, domain-agnostic execution dashboard for people who want t
 - Dark-first dashboard shell with sidebar and top command bar
 - Placeholder routes for future modules
 
+## Sprint 2 Features
+
+- Protected `/onboarding` profile builder
+- Multi-step identity, goals, skills, and execution settings flow
+- Prisma models for `UserProfile` and `UserProfileItem`
+- Server-side redirect from dashboard to onboarding until completion
+- Onboarding save endpoint that writes profile data to MySQL
+- Personalized dashboard welcome based on saved profile data
+
 ## Project Structure
 
 - `app/(auth)` authentication pages
@@ -41,6 +50,7 @@ AscendOS is a premium, domain-agnostic execution dashboard for people who want t
 - `components/ui` reusable UI primitives
 - `components/layout` app shell and providers
 - `components/forms` auth form
+- `components/forms` auth form and onboarding form
 - `components/dashboard` placeholder route UI
 - `lib` auth, Prisma, utilities, and validations
 - `prisma` schema and seed files
@@ -169,7 +179,6 @@ npm start
 
 ## Roadmap
 
-- Onboarding flow
 - Goal creation and tracking
 - Daily logs
 - Weekly reviews
@@ -182,4 +191,4 @@ npm start
 
 ## Current Status
 
-Sprint 1 is intentionally limited to the foundation. The product is now ready for onboarding and goal-system expansion in the next sprint.
+Sprint 2 is now focused on the execution profile builder. The product is ready for goal-system expansion in the next sprint.

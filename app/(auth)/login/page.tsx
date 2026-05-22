@@ -3,13 +3,25 @@ import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { authOptions } from "@/lib/auth";
+import { prisma } from "@/lib/prisma";
 import { AuthForm } from "@/components/forms/auth-form";
 
 export default async function LoginPage() {
   const session = await getServerSession(authOptions);
 
   if (session) {
-    redirect("/dashboard");
+    const user = await prisma.user.findUnique({
+      where: {
+        id: session.user.id,
+      },
+      select: {
+        onboardingCompleted: true,
+      },
+    });
+
+    if (user) {
+      redirect(user.onboardingCompleted ? "/dashboard" : "/onboarding");
+    }
   }
 
   return (

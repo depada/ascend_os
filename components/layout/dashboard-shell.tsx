@@ -7,7 +7,6 @@ import { usePathname } from "next/navigation";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { signOut } from "next-auth/react";
 import type { Session } from "next-auth";
-import { useTheme } from "next-themes";
 import {
   CheckSquare,
   ChevronDown,
@@ -31,6 +30,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+import { useTheme } from "@/components/layout/providers";
 
 type DashboardShellProps = {
   children: ReactNode;

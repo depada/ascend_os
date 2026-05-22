@@ -12,6 +12,16 @@ enum Role {
   ADMIN
 }
 
+enum ProfileItemKind {
+  PRIMARY_GOAL
+  DOMAIN
+  SKILL
+  LANGUAGE
+  PLATFORM
+  DAILY_MINIMUM
+  CONSTRAINT
+}
+
 model User {
   id                  String   @id @default(cuid())
   name                String
@@ -22,5 +32,41 @@ model User {
   createdAt           DateTime @default(now())
   updatedAt           DateTime @updatedAt
 
+  profile UserProfile?
+
   @@map("users")
+}
+
+model UserProfile {
+  id                           String            @id @default(cuid())
+  userId                       String            @unique
+  currentIdentity              String
+  desiredIdentity              String
+  weeklyReviewDay              String
+  intensityLevel               String
+  availableTimePerDayMinutes   Int
+  availableTimePerWeekMinutes  Int
+  preferredExecutionStyle      String
+  createdAt                    DateTime          @default(now())
+  updatedAt                    DateTime          @updatedAt
+
+  user  User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items UserProfileItem[]
+
+  @@map("user_profiles")
+}
+
+model UserProfileItem {
+  id         String           @id @default(cuid())
+  profileId  String
+  kind       ProfileItemKind
+  value      String
+  sortOrder  Int              @default(0)
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+
+  profile UserProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@index([profileId, kind])
+  @@map("user_profile_items")
 }
