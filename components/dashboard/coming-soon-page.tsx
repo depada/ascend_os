@@ -2,7 +2,13 @@ import Link from "next/link";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 type ComingSoonPageProps = {
   title: string;
@@ -13,7 +19,9 @@ export function ComingSoonPage({ title, description }: ComingSoonPageProps) {
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col gap-6">
       <div className="flex items-center justify-between gap-4">
-        <Badge className="border-white/10 bg-white/6 text-slate-200">Placeholder route</Badge>
+        <Badge className="border-white/10 bg-white/6 text-slate-200">
+          Placeholder route
+        </Badge>
         <span className="text-sm text-slate-500">Sprint 1</span>
       </div>
       <Card className="border-white/10 bg-white/6 text-white">
@@ -22,7 +30,9 @@ export function ComingSoonPage({ title, description }: ComingSoonPageProps) {
             <Sparkles className="h-5 w-5" />
           </div>
           <CardTitle className="text-3xl text-white">{title}</CardTitle>
-          <CardDescription className="max-w-2xl text-base text-slate-400">{description}</CardDescription>
+          <CardDescription className="max-w-2xl text-base text-slate-400">
+            {description}
+          </CardDescription>
         </CardHeader>
         <CardContent className="flex flex-wrap gap-3 px-8 pb-8">
           <Button asChild>

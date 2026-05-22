@@ -8,7 +8,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { loginSchema, signupSchema } from "@/lib/validations";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
@@ -57,7 +63,9 @@ export function AuthForm({ mode }: AuthFormProps) {
           }),
         });
 
-        const payload = (await response.json().catch(() => ({}))) as { message?: string };
+        const payload = (await response.json().catch(() => ({}))) as {
+          message?: string;
+        };
 
         if (!response.ok) {
           setErrorMessage(payload.message ?? "Unable to create account.");
@@ -72,7 +80,9 @@ export function AuthForm({ mode }: AuthFormProps) {
         });
 
         if (result?.error) {
-          setErrorMessage("Account created, but sign in failed. Please log in again.");
+          setErrorMessage(
+            "Account created, but sign in failed. Please log in again.",
+          );
           router.push("/login");
           return;
         }
@@ -106,9 +116,15 @@ export function AuthForm({ mode }: AuthFormProps) {
           <span className="inline-flex rounded-full border border-sky-400/20 bg-sky-400/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.3em] text-sky-100">
             {isSignup ? "Create account" : "Welcome back"}
           </span>
-          <span className="text-xs uppercase tracking-[0.25em] text-slate-400">Sprint 1</span>
+          <span className="text-xs uppercase tracking-[0.25em] text-slate-400">
+            Sprint 1
+          </span>
         </div>
-        <CardTitle className="text-3xl text-white">{isSignup ? "Build your first execution system" : "Sign in to your dashboard"}</CardTitle>
+        <CardTitle className="text-3xl text-white">
+          {isSignup
+            ? "Build your first execution system"
+            : "Sign in to your dashboard"}
+        </CardTitle>
         <CardDescription className="max-w-md text-slate-400">
           {isSignup
             ? "Create a private workspace for your goals, routines, and long-term mission."
@@ -120,7 +136,10 @@ export function AuthForm({ mode }: AuthFormProps) {
         <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
           {isSignup ? (
             <div className="space-y-2">
-              <label className="text-sm font-medium text-slate-200" htmlFor="name">
+              <label
+                className="text-sm font-medium text-slate-200"
+                htmlFor="name"
+              >
                 Name
               </label>
               <Input
@@ -131,13 +150,18 @@ export function AuthForm({ mode }: AuthFormProps) {
                 {...form.register("name")}
               />
               {form.formState.errors.name ? (
-                <p className="text-sm text-rose-300">{form.formState.errors.name.message}</p>
+                <p className="text-sm text-rose-300">
+                  {form.formState.errors.name.message}
+                </p>
               ) : null}
             </div>
           ) : null}
 
           <div className="space-y-2">
-            <label className="text-sm font-medium text-slate-200" htmlFor="email">
+            <label
+              className="text-sm font-medium text-slate-200"
+              htmlFor="email"
+            >
               Email
             </label>
             <Input
@@ -149,24 +173,33 @@ export function AuthForm({ mode }: AuthFormProps) {
               {...form.register("email")}
             />
             {form.formState.errors.email ? (
-              <p className="text-sm text-rose-300">{form.formState.errors.email.message}</p>
+              <p className="text-sm text-rose-300">
+                {form.formState.errors.email.message}
+              </p>
             ) : null}
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium text-slate-200" htmlFor="password">
+            <label
+              className="text-sm font-medium text-slate-200"
+              htmlFor="password"
+            >
               Password
             </label>
             <Input
               autoComplete={isSignup ? "new-password" : "current-password"}
               className="bg-white/5"
               id="password"
-              placeholder={isSignup ? "Create a strong password" : "Enter your password"}
+              placeholder={
+                isSignup ? "Create a strong password" : "Enter your password"
+              }
               type="password"
               {...form.register("password")}
             />
             {form.formState.errors.password ? (
-              <p className="text-sm text-rose-300">{form.formState.errors.password.message}</p>
+              <p className="text-sm text-rose-300">
+                {form.formState.errors.password.message}
+              </p>
             ) : null}
           </div>
 
@@ -176,7 +209,11 @@ export function AuthForm({ mode }: AuthFormProps) {
             </div>
           ) : null}
 
-          <Button className="group w-full h-12 text-base" disabled={isPending} type="submit">
+          <Button
+            className="group w-full h-12 text-base"
+            disabled={isPending}
+            type="submit"
+          >
             {isPending ? (
               <>
                 <Loader2 className="h-4 w-4 animate-spin" />
@@ -191,7 +228,9 @@ export function AuthForm({ mode }: AuthFormProps) {
           </Button>
         </form>
 
-        <p className={cn("text-sm leading-6 text-slate-400")}>Demo credentials after seeding: demo@example.com / password123</p>
+        <p className={cn("text-sm leading-6 text-slate-400")}>
+          Demo credentials after seeding: demo@example.com / password123
+        </p>
       </CardContent>
     </Card>
   );

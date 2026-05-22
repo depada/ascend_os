@@ -5,7 +5,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import { signOut, useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
+import type { Session } from "next-auth";
 import { useTheme } from "next-themes";
 import {
   CheckSquare,
@@ -33,6 +34,7 @@ import { cn } from "@/lib/utils";
 
 type DashboardShellProps = {
   children: ReactNode;
+  session: Session;
 };
 
 const navItems = [
@@ -49,9 +51,8 @@ const navItems = [
   { href: "/settings", label: "Settings", icon: Settings2 },
 ];
 
-export function DashboardShell({ children }: DashboardShellProps) {
+export function DashboardShell({ children, session }: DashboardShellProps) {
   const pathname = usePathname();
-  const { data: session } = useSession();
   const { theme, setTheme } = useTheme();
   const user = session?.user;
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -70,7 +71,7 @@ export function DashboardShell({ children }: DashboardShellProps) {
       <div className="flex min-h-screen">
         <aside
           className={cn(
-            "fixed inset-y-0 left-0 z-40 w-80 border-r border-white/10 bg-slate-950/95 px-5 py-6 backdrop-blur-xl transition-transform duration-300 lg:sticky lg:top-0 lg:translate-x-0",
+            "fixed inset-y-0 left-0 z-40 w-80 border-r border-white/10 bg-slate-950/96 px-5 py-6 transform-gpu transition-transform duration-300 lg:sticky lg:top-0 lg:translate-x-0",
             mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0",
           )}
         >
@@ -81,23 +82,41 @@ export function DashboardShell({ children }: DashboardShellProps) {
                   <Target className="h-5 w-5" />
                 </div>
                 <div>
-                  <p className="text-base font-semibold tracking-tight text-white">AscendOS</p>
-                  <p className="text-xs uppercase tracking-[0.25em] text-slate-500">Command center</p>
+                  <p className="text-base font-semibold tracking-tight text-white">
+                    AscendOS
+                  </p>
+                  <p className="text-xs uppercase tracking-[0.25em] text-slate-500">
+                    Command center
+                  </p>
                 </div>
               </div>
-              <Button className="lg:hidden" size="icon" variant="outline" onClick={() => setMobileOpen(false)}>
+              <Button
+                className="lg:hidden"
+                size="icon"
+                variant="outline"
+                onClick={() => setMobileOpen(false)}
+              >
                 <Menu className="h-4 w-4" />
               </Button>
             </div>
 
             <div className="rounded-3xl border border-white/10 bg-white/6 p-4">
-              <p className="text-xs uppercase tracking-[0.25em] text-slate-500">Current state</p>
+              <p className="text-xs uppercase tracking-[0.25em] text-slate-500">
+                Current state
+              </p>
               <div className="mt-3 flex items-center justify-between gap-3">
                 <div>
-                  <p className="text-sm font-medium text-white">{user?.name ?? "Execution operator"}</p>
-                  <p className="text-sm text-slate-400">{user?.email ?? "Signed in"}</p>
+                  <p className="text-sm font-medium text-white">
+                    {user?.name ?? "Execution operator"}
+                  </p>
+                  <p className="text-sm text-slate-400">
+                    {user?.email ?? "Signed in"}
+                  </p>
                 </div>
-                <Badge variant="secondary" className="border-white/10 bg-white/6 text-slate-200">
+                <Badge
+                  variant="secondary"
+                  className="border-white/10 bg-white/6 text-slate-200"
+                >
                   {user?.role ?? "USER"}
                 </Badge>
               </div>
@@ -120,7 +139,12 @@ export function DashboardShell({ children }: DashboardShellProps) {
                     key={item.href}
                     onClick={() => setMobileOpen(false)}
                   >
-                    <Icon className={cn("h-4 w-4", active ? "text-sky-200" : "text-slate-500")} />
+                    <Icon
+                      className={cn(
+                        "h-4 w-4",
+                        active ? "text-sky-200" : "text-slate-500",
+                      )}
+                    />
                     {item.label}
                   </Link>
                 );
@@ -128,24 +152,34 @@ export function DashboardShell({ children }: DashboardShellProps) {
             </nav>
 
             <div className="rounded-3xl border border-white/10 bg-[linear-gradient(180deg,rgba(14,165,233,0.14),rgba(15,23,42,0.95))] p-4">
-              <p className="text-sm font-medium text-white">Sprint 1 foundation</p>
+              <p className="text-sm font-medium text-white">
+                Sprint 1 foundation
+              </p>
               <p className="mt-2 text-sm leading-6 text-slate-400">
-                Onboarding, goals, and AI layers are intentionally deferred until the base execution shell is stable.
+                Onboarding, goals, and AI layers are intentionally deferred
+                until the base execution shell is stable.
               </p>
             </div>
           </div>
         </aside>
 
         <div className="flex min-w-0 flex-1 flex-col">
-          <header className="sticky top-0 z-30 border-b border-white/10 bg-slate-950/70 backdrop-blur-xl">
+          <header className="sticky top-0 z-30 border-b border-white/10 bg-slate-950/95">
             <div className="flex items-center gap-3 px-4 py-4 sm:px-6 lg:px-8">
-              <Button className="lg:hidden" size="icon" variant="outline" onClick={() => setMobileOpen(true)}>
+              <Button
+                className="lg:hidden"
+                size="icon"
+                variant="outline"
+                onClick={() => setMobileOpen(true)}
+              >
                 <Menu className="h-4 w-4" />
               </Button>
 
               <div className="flex flex-1 items-center gap-3 rounded-2xl border border-white/10 bg-white/6 px-4 py-3 text-sm text-slate-400">
                 <Search className="h-4 w-4 shrink-0 text-slate-500" />
-                <span>Command bar: search goals, logs, reviews, routes, or skills</span>
+                <span>
+                  Command bar: search goals, logs, reviews, routes, or skills
+                </span>
               </div>
 
               <Button
@@ -154,7 +188,11 @@ export function DashboardShell({ children }: DashboardShellProps) {
                 size="icon"
                 variant="outline"
               >
-                {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                {theme === "dark" ? (
+                  <Sun className="h-4 w-4" />
+                ) : (
+                  <Moon className="h-4 w-4" />
+                )}
               </Button>
 
               <DropdownMenu.Root>
@@ -164,8 +202,12 @@ export function DashboardShell({ children }: DashboardShellProps) {
                       {initials}
                     </span>
                     <span className="hidden text-left sm:block">
-                      <span className="block text-sm font-medium text-white">{user?.name ?? "Account"}</span>
-                      <span className="block text-xs text-slate-400">{user?.role ?? "USER"}</span>
+                      <span className="block text-sm font-medium text-white">
+                        {user?.name ?? "Account"}
+                      </span>
+                      <span className="block text-xs text-slate-400">
+                        {user?.role ?? "USER"}
+                      </span>
                     </span>
                     <ChevronDown className="h-4 w-4 text-slate-400" />
                   </Button>
@@ -177,8 +219,12 @@ export function DashboardShell({ children }: DashboardShellProps) {
                     sideOffset={10}
                   >
                     <div className="px-3 py-2">
-                      <p className="text-sm font-medium text-white">{user?.name ?? "Account"}</p>
-                      <p className="text-xs text-slate-400">{user?.email ?? "Signed in user"}</p>
+                      <p className="text-sm font-medium text-white">
+                        {user?.name ?? "Account"}
+                      </p>
+                      <p className="text-xs text-slate-400">
+                        {user?.email ?? "Signed in user"}
+                      </p>
                     </div>
                     <DropdownMenu.Separator className="my-2 h-px bg-white/10" />
                     <DropdownMenu.Item className="flex cursor-pointer items-center gap-2 rounded-xl px-3 py-2 text-sm text-slate-300 outline-none hover:bg-white/6 hover:text-white">
@@ -187,9 +233,15 @@ export function DashboardShell({ children }: DashboardShellProps) {
                     </DropdownMenu.Item>
                     <DropdownMenu.Item
                       className="flex cursor-pointer items-center gap-2 rounded-xl px-3 py-2 text-sm text-slate-300 outline-none hover:bg-white/6 hover:text-white"
-                      onSelect={() => setTheme(theme === "dark" ? "light" : "dark")}
+                      onSelect={() =>
+                        setTheme(theme === "dark" ? "light" : "dark")
+                      }
                     >
-                      {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                      {theme === "dark" ? (
+                        <Sun className="h-4 w-4" />
+                      ) : (
+                        <Moon className="h-4 w-4" />
+                      )}
                       Toggle theme
                     </DropdownMenu.Item>
                     <DropdownMenu.Separator className="my-2 h-px bg-white/10" />
@@ -206,7 +258,9 @@ export function DashboardShell({ children }: DashboardShellProps) {
             </div>
           </header>
 
-          <main className="min-w-0 flex-1 px-4 py-6 sm:px-6 lg:px-8">{children}</main>
+          <main className="min-w-0 flex-1 px-4 py-6 sm:px-6 lg:px-8">
+            {children}
+          </main>
         </div>
 
         {mobileOpen ? (

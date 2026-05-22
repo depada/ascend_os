@@ -13,8 +13,12 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
               <BarChart3 className="h-5 w-5" />
             </span>
             <div>
-              <p className="text-base font-semibold tracking-wide text-white">AscendOS</p>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Execution system</p>
+              <p className="text-base font-semibold tracking-wide text-white">
+                AscendOS
+              </p>
+              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">
+                Execution system
+              </p>
             </div>
           </div>
 
@@ -26,7 +30,8 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
               Turn vague ambition into measurable execution.
             </h1>
             <p className="max-w-2xl text-base leading-7 text-slate-300 sm:text-lg">
-              Track who you are now, who you want to become, and what you are willing to invest across any domain that matters.
+              Track who you are now, who you want to become, and what you are
+              willing to invest across any domain that matters.
             </p>
             <Link
               className="inline-flex items-center gap-2 text-sm font-medium text-sky-200 transition-colors hover:text-white"
@@ -43,9 +48,14 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
               ["Domain agnostic", "Career, fitness, finance, and more"],
               ["Built for motion", "Daily logs, reviews, and scorecards"],
             ].map(([title, description]) => (
-              <div key={title} className="rounded-3xl border border-white/10 bg-white/6 p-4 backdrop-blur-sm">
+              <div
+                key={title}
+                className="rounded-3xl border border-white/10 bg-white/6 p-4 backdrop-blur-sm"
+              >
                 <p className="text-sm font-medium text-white">{title}</p>
-                <p className="mt-1 text-sm leading-6 text-slate-400">{description}</p>
+                <p className="mt-1 text-sm leading-6 text-slate-400">
+                  {description}
+                </p>
               </div>
             ))}
           </div>

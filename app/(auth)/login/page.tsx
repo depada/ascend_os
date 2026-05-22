@@ -19,7 +19,10 @@ export default async function LoginPage() {
           <Sparkles className="h-4 w-4 text-sky-300" />
           Sign in
         </span>
-        <Link className="inline-flex items-center gap-2 text-sky-300 transition-colors hover:text-white" href="/signup">
+        <Link
+          className="inline-flex items-center gap-2 text-sky-300 transition-colors hover:text-white"
+          href="/signup"
+        >
           Create account
           <ArrowRight className="h-4 w-4" />
         </Link>

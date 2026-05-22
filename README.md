@@ -154,9 +154,9 @@ npm start
 1. Push the repository to GitHub.
 2. Import the project into Vercel.
 3. Add the production environment variables:
-	- `DATABASE_URL`
-	- `NEXTAUTH_SECRET`
-	- `NEXTAUTH_URL`
+   - `DATABASE_URL`
+   - `NEXTAUTH_SECRET`
+   - `NEXTAUTH_URL`
 4. Run the Prisma migration against the production MySQL database.
 5. Seed the database if you want the demo accounts available in production.
 
